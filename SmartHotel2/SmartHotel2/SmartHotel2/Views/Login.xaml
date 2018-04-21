@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartHotel2.Views.Login"
+             xmlns:converters="clr-namespace:SmartHotel2.Converters"
+              xmlns:ffSvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+               xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"  
+              xmlns:ffTransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             >
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:PasswordStrengthToColorConverter x:Key="PasswordStrengthToColorConverter" />
+
+            <Color x:Key="TextColor">Pink</Color>
+            <Color x:Key="Placeholder">Blue</Color>
+            <Style x:Key="MyTextStyle" TargetType="Entry">
+                <Setter Property="TextColor" Value="{StaticResource TextColor}" />
+                <Setter Property="Placeholder" Value="{StaticResource Placeholder}" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="7*" />
+            <RowDefinition Height="6*" />
+             
+        </Grid.RowDefinitions>
+        <Image Source="img_header_background_1" Aspect="Fill" />
+        <Grid Padding="40,10,40,40">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="18" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="18" />
+            <RowDefinition Height="Auto" />
+                <RowDefinition Height="18" />
+        </Grid.RowDefinitions>  
+     
+            <Image Source="logo_splash" HorizontalOptions="Center" VerticalOptions="Center" />
+            <Label  Grid.Row="1" Text="Username" TextColor="{StaticResource TextColor}" >
+                <Label.FontFamily>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="Android" Value="Poppins-Bold.ttf#Poppins" />
+                        <On Platform="iOS" Value="Poppins-Bold" />
+                    </OnPlatform>
+                </Label.FontFamily>
+            </Label> 
+
+            <Entry  Grid.Row="2" Style="{StaticResource MyTextStyle}" Placeholder="Username" x:Name="UsernameEntry" Text="{Binding UserName}" />
+
+
+            <Label  Grid.Row="3" Text="Password" TextColor="{StaticResource TextColor}" />
+
+            <StackLayout Grid.Row="4">
+            <Entry   Style="{StaticResource MyTextStyle}" IsPassword="True" Placeholder="Password" x:Name="PasswordEntry" Text="{Binding Password}" />
+               
+            </StackLayout>
+            <Label  Grid.Row="5" Text="Forgot Password" TextColor="{StaticResource TextColor}" HorizontalOptions="End" />
+
+
+        </Grid>
+        <Button VerticalOptions="Start" BackgroundColor="White" Text="Sign In" Grid.Row="1" Margin="30,-30, 30, 0" HeightRequest="60" Clicked="SignIn_Click" Command="{Binding LoginCommand}" />
+
+        <Grid Grid.Row="1">
+            <StackLayout VerticalOptions="Center">
+                <Label Text="ABC" Rotation="{Binding Path=Value,Source={x:Reference slider}}" HorizontalOptions="Center" />
+                <Slider Maximum="360" Minimum="0" x:Name="slider" />
+            </StackLayout>
+        </Grid>
+    </Grid>
+   
+</ContentPage>
